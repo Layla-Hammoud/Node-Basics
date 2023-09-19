@@ -63,15 +63,13 @@ function unknownCommand(c) {
  * @returns {void}
  */
 function hello(inputs) {
-  if(inputs !== undefined){
-      // map over the elements in the array to remove the white space and the new line which is /n
+  if (inputs !== undefined) {
+    // map over the elements in the array to remove the white space and the new line which is /n
     entries = inputs.map((word) => word.trim().replace("/n", ""));
     console.log(`Hello ${entries.join(" ")}!`);
+  } else {
+    console.log("Hello!");
   }
-  else{
-    console.log('Hello!')
-  }
-
 }
 
 /**
@@ -91,7 +89,7 @@ function quit() {
 function help() {
   console.log("Our possible commands are");
   console.log("-------------------------------");
-  console.log("hello : will greet you back");
+  console.log("hello : will greet you back if you pass anything with it for example hello x it will return Hello x! ");
   console.log("quit or exit : to exit the application");
 }
 
