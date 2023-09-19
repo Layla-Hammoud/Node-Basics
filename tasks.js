@@ -34,11 +34,14 @@ function startApp(name){
  * @returns {void}
  */
 function onDataReceived(text) {
+  //make the text as an array
+  let inputArray = text.split(" ");
   if (text === 'quit\n' || text === 'exit\n') {
     quit();
   }
-  else if(text === 'hello\n'){
-    hello();
+  else if(inputArray[0].trim() === 'hello'){
+    // take the rest elements of the array other than the command hello and pass it to hello 
+    hello(inputArray.slice(1));
   }
   else if(text === 'help\n'){
     help()
@@ -66,8 +69,10 @@ function unknownCommand(c){
  *
  * @returns {void}
  */
-function hello(){
-  console.log('hello!')
+function hello(inputs){
+  // map over the elements in the array to remove the white space and the new line which is /n
+  entries = inputs.map((word)=>word.trim().replace("/n",""))
+  console.log(`Hello ${entries.join(" ")}!`);
 }
 
 
