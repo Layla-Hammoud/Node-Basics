@@ -40,6 +40,9 @@ function onDataReceived(text) {
   else if(text === 'hello\n'){
     hello();
   }
+  else if(text === 'help\n'){
+    help()
+  }
   else{
     unknownCommand(text);
   }
@@ -53,6 +56,14 @@ function onDataReceived(text) {
  * @param  {string} c the text received
  * @returns {void}
  */
+
+function help(){
+  console.log("Our possible commands are")
+  console.log("-------------------------------")
+  console.log('hello command will greet you back');
+  console.log('quit or exit to exit the application');
+}
+
 function unknownCommand(c){
   console.log('unknown command: "'+c.trim()+'"')
 }
