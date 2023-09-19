@@ -31,6 +31,7 @@ function startApp(name) {
  * @param  {string} text data typed by the user
  * @returns {void}
  */
+let tasks = ['buy batata','buy bread','buy car']
 function onDataReceived(text) {
   //make the text as an array
   let inputArray = text.split(" ");
@@ -41,7 +42,10 @@ function onDataReceived(text) {
     inputArray.length > 1 ? hello(inputArray.slice(1)) : hello();
   } else if (text === "help\n") {
     help();
-  } else {
+  }
+  else if(text === "list\n"){
+    list(tasks)
+  }else {
     unknownCommand(text);
   }
 }
@@ -91,6 +95,11 @@ function help() {
   console.log("-------------------------------");
   console.log("hello : will greet you back if you pass anything with it for example hello x it will return Hello x! ");
   console.log("quit or exit : to exit the application");
+}
+
+function list(tasks){
+toDolist = tasks.map((task , index)=> `${index} ${task}`)
+console.log(toDolist.join('\n'))
 }
 
 // The following line starts the application
