@@ -56,14 +56,6 @@ function onDataReceived(text) {
  * @param  {string} c the text received
  * @returns {void}
  */
-
-function help(){
-  console.log("Our possible commands are")
-  console.log("-------------------------------")
-  console.log('hello command will greet you back');
-  console.log('quit or exit to exit the application');
-}
-
 function unknownCommand(c){
   console.log('unknown command: "'+c.trim()+'"')
 }
@@ -87,6 +79,17 @@ function hello(){
 function quit(){
   console.log('Quitting now, goodbye!')
   process.exit();
+}
+/**
+ * This function will list all the commands that we have in the application till now
+ *
+ * @returns {void}
+ */
+function help(){
+  console.log("Our possible commands are")
+  console.log("-------------------------------")
+  console.log('hello : will greet you back');
+  console.log('quit or exit : to exit the application');
 }
 
 // The following line starts the application
