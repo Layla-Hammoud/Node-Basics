@@ -34,20 +34,30 @@ function startApp(name) {
 let tasks = ['buy batata','buy bread','buy car']
 function onDataReceived(text) {
   //make the text as an array
-  let inputArray = text.split(" ");
+  let inputArray = text.trim().split(" ");
   if (text === "quit\n" || text === "exit\n") {
     quit();
   } else if (inputArray[0].trim() === "hello") {
     // check if the inputArray's length is more than 1 which mean that the user enter his name take the rest elements of the array other than the command hello and pass it to hello
-    inputArray.length > 1 ? hello(inputArray.slice(1)) : hello();
+    inputArray.length > 1 ? hello(inputArray.slice(1)) : console.log("Hello!");
   } else if (text === "help\n") {
     help();
   }
   else if(text === "list\n"){
     list(tasks)
+  }
+  else if(inputArray[0].trim() === "add"){
+    inputArray.length > 1 ? add(inputArray.slice(1)) : console.log("Error you can not add empty tesk");
   }else {
     unknownCommand(text);
   }
+}
+
+
+function add(task){
+  let stringTask = task.join(" ");
+  tasks.push(stringTask);
+  return console.log("task added");
 }
 
 /**
@@ -66,14 +76,11 @@ function unknownCommand(c) {
  *
  * @returns {void}
  */
+function removeNewLineAndWhiteSace(text){
+  return text.trim().replace("/n", "")
+}
 function hello(inputs) {
-  if (inputs !== undefined) {
-    // map over the elements in the array to remove the white space and the new line which is /n
-    entries = inputs.map((word) => word.trim().replace("/n", ""));
-    console.log(`Hello ${entries.join(" ")}!`);
-  } else {
-    console.log("Hello!");
-  }
+    console.log(`Hello ${inputs.join(" ").replace("\n","")}!`);
 }
 
 /**
