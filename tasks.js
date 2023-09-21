@@ -107,6 +107,9 @@ function help() {
   console.log("Our possible commands are");
   console.log("-------------------------------");
   console.log("hello : will greet you back if you pass anything with it for example hello x it will return Hello x! ");
+  console.log("list : will show you all the tasks");
+  console.log("add with the task that you will add : will add your new task to your tasks without task will show an error");
+  console.log("remove without anything will remove the last task, remove with the number of task will remove the specific task");
   console.log("quit or exit : to exit the application");
 }
 
