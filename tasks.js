@@ -58,10 +58,26 @@ function onDataReceived(text) {
       : console.log("Error you can not add empty tesk");
   } else if (inputArray[0] === "remove") {
     inputArray.length > 1 ? remove(inputArray[1].trim()) : tasks.pop();
-  } else {
+  } 
+  else if(inputArray[0] === "check"){
+    inputArray.length > 1 ? check(inputArray[1].trim()) : console.log("you have to enter the task number")
+  }
+  else if(inputArray[0] === "uncheck"){
+    inputArray.length > 1 ? uncheck(inputArray[1].trim()) : console.log("you have to enter the task number")
+  }else {
     unknownCommand(text);
   }
 }
+function uncheck (index){
+  tasks[Number(index)].done = false
+  return console.log("task unchecked")
+}
+
+function check(index){
+  tasks[Number(index)].done = true
+  return console.log("task checked")
+}
+
 function edit(input) {
   if (Number.isNaN(Number(input[0]))) {
     tasks[tasks.length - 1] = tasks.task = input.join(" ");
@@ -145,7 +161,7 @@ function help() {
 }
 
 function list(tasks) {
-  toDolist = tasks.map((element,index) => `${element.done?"[✓]":"[]"} ${index} ${element.task}`);
+  toDolist = tasks.map((element,index) => `${element.done?"[✓]":"[ ]"} ${index} ${element.task}`);
   console.log(toDolist.join("\n"));
 }
 
