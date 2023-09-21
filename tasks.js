@@ -158,6 +158,9 @@ function help() {
     "remove without anything will remove the last task, remove with the number of task will remove the specific task"
   );
   console.log("quit or exit : to exit the application");
+  console.log("edit plus the number of the task plus the task will edit the task without the number will edit the last one")
+  console.log("check plus the number of the task will check the task")
+  console.log("ucheck plus the number of the task will ucheck the task")
 }
 
 function list(tasks) {
