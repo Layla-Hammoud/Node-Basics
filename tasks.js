@@ -31,7 +31,11 @@ function startApp(name) {
  * @param  {string} text data typed by the user
  * @returns {void}
  */
-let tasks = ["buy batata", "buy bread", "buy car"];
+let tasks = [
+  { task: "Buy potato", done: false },
+  { task: "Buy game", done: true },
+  { task: "Buy banana", done: false },
+];
 function onDataReceived(text) {
   //make the text as an array
   let inputArray = text.trim().split(" ");
@@ -60,13 +64,13 @@ function onDataReceived(text) {
 }
 function edit(input) {
   if (Number.isNaN(Number(input[0]))) {
-    tasks[tasks.length - 1] = input.join(" ");
+    tasks[tasks.length - 1] = tasks.task = input.join(" ");
   } else {
     if (Number(input[0]) < 0 || Number(input[0]) > tasks.length - 1) {
       return console.log("task not exist");
     } else {
       let subTasks = input.slice(1);
-      tasks[Number(input[0])] = subTasks.join(" ");
+      tasks[Number(input[0])].task = subTasks.join(" ");
       return console.log("task edited");
     }
   }
@@ -83,7 +87,7 @@ function remove(index) {
 }
 function add(task) {
   let stringTask = task.join(" ");
-  tasks.push(stringTask);
+  tasks.push({task:stringTask,done:false});
   return console.log("task added");
 }
 
@@ -141,7 +145,7 @@ function help() {
 }
 
 function list(tasks) {
-  toDolist = tasks.map((task, index) => `${index} ${task}`);
+  toDolist = tasks.map((element,index) => `${element.done?"[✓]":"[]"} ${index} ${element.task}`);
   console.log(toDolist.join("\n"));
 }
 
