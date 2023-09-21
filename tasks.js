@@ -31,7 +31,7 @@ function startApp(name) {
  * @param  {string} text data typed by the user
  * @returns {void}
  */
-let tasks = ['buy batata','buy bread','buy car']
+let tasks = ["buy batata", "buy bread", "buy car"];
 function onDataReceived(text) {
   //make the text as an array
   let inputArray = text.trim().split(" ");
@@ -42,31 +42,46 @@ function onDataReceived(text) {
     inputArray.length > 1 ? hello(inputArray.slice(1)) : console.log("Hello!");
   } else if (text === "help\n") {
     help();
-  }
-  else if(text === "list\n"){
-    list(tasks)
-  }
-  else if(inputArray[0] === "add"){
-    inputArray.length > 1 ? add(inputArray.slice(1)) : console.log("Error you can not add empty tesk");
-  }
-  else if(inputArray[0] === "remove"){
+  } else if (text === "list\n") {
+    list(tasks);
+  } else if (inputArray[0] === "edit") {
+    inputArray.length > 1
+      ? edit(inputArray.slice(1))
+      : console.log("error you have to enter the edited task");
+  } else if (inputArray[0] === "add") {
+    inputArray.length > 1
+      ? add(inputArray.slice(1))
+      : console.log("Error you can not add empty tesk");
+  } else if (inputArray[0] === "remove") {
     inputArray.length > 1 ? remove(inputArray[1].trim()) : tasks.pop();
-  }else {
+  } else {
     unknownCommand(text);
   }
 }
-
-function remove(index){
-  index = Number(index)
-  if(index < 0 || index > tasks.length-1){
-    return console.log("task number is not exist")
-  }
-  else{
-    tasks.splice(index,1)
-    return console.log("task is removed")
+function edit(input) {
+  if (Number.isNaN(Number(input[0]))) {
+    tasks[tasks.length - 1] = input.join(" ");
+  } else {
+    if (Number(input[0]) < 0 || Number(input[0]) > tasks.length - 1) {
+      return console.log("task not exist");
+    } else {
+      let subTasks = input.slice(1);
+      tasks[Number(input[0])] = subTasks.join(" ");
+      return console.log("task edited");
+    }
   }
 }
-function add(task){
+
+function remove(index) {
+  index = Number(index);
+  if (index < 0 || index > tasks.length - 1) {
+    return console.log("task number is not exist");
+  } else {
+    tasks.splice(index, 1);
+    return console.log("task is removed");
+  }
+}
+function add(task) {
   let stringTask = task.join(" ");
   tasks.push(stringTask);
   return console.log("task added");
@@ -88,11 +103,11 @@ function unknownCommand(c) {
  *
  * @returns {void}
  */
-function removeNewLineAndWhiteSace(text){
-  return text.trim().replace("/n", "")
+function removeNewLineAndWhiteSace(text) {
+  return text.trim().replace("/n", "");
 }
 function hello(inputs) {
-    console.log(`Hello ${inputs.join(" ").replace("\n","")}!`);
+  console.log(`Hello ${inputs.join(" ").replace("\n", "")}!`);
 }
 
 /**
@@ -112,16 +127,22 @@ function quit() {
 function help() {
   console.log("Our possible commands are");
   console.log("-------------------------------");
-  console.log("hello : will greet you back if you pass anything with it for example hello x it will return Hello x! ");
+  console.log(
+    "hello : will greet you back if you pass anything with it for example hello x it will return Hello x! "
+  );
   console.log("list : will show you all the tasks");
-  console.log("add with the task that you will add : will add your new task to your tasks without task will show an error");
-  console.log("remove without anything will remove the last task, remove with the number of task will remove the specific task");
+  console.log(
+    "add with the task that you will add : will add your new task to your tasks without task will show an error"
+  );
+  console.log(
+    "remove without anything will remove the last task, remove with the number of task will remove the specific task"
+  );
   console.log("quit or exit : to exit the application");
 }
 
-function list(tasks){
-toDolist = tasks.map((task , index)=> `${index} ${task}`)
-console.log(toDolist.join('\n'))
+function list(tasks) {
+  toDolist = tasks.map((task, index) => `${index} ${task}`);
+  console.log(toDolist.join("\n"));
 }
 
 // The following line starts the application
