@@ -1,0 +1,18 @@
+[
+  {
+    "task": "Buy potato",
+    "done": true
+  },
+  {
+    "task": "Buy game",
+    "done": true
+  },
+  {
+    "task": "Buy banana",
+    "done": false
+  },
+  {
+    "task": "sell honey",
+    "done": true
+  }
+]

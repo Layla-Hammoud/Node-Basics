@@ -8,6 +8,7 @@
  * @param  {string} name the name of the app
  * @returns {void}
  */
+const fs = require('fs');
 function startApp(name) {
   process.stdin.resume();
   process.stdin.setEncoding("utf8");
@@ -31,11 +32,7 @@ function startApp(name) {
  * @param  {string} text data typed by the user
  * @returns {void}
  */
-let tasks = [
-  { task: "Buy potato", done: false },
-  { task: "Buy game", done: true },
-  { task: "Buy banana", done: false },
-];
+let tasks = loadingData('database.json');
 function onDataReceived(text) {
   //make the text as an array
   let inputArray = text.trim().split(" ");
@@ -123,9 +120,6 @@ function unknownCommand(c) {
  *
  * @returns {void}
  */
-function removeNewLineAndWhiteSace(text) {
-  return text.trim().replace("/n", "");
-}
 function hello(inputs) {
   console.log(`Hello ${inputs.join(" ").replace("\n", "")}!`);
 }
@@ -135,9 +129,26 @@ function hello(inputs) {
  *
  * @returns {void}
  */
+function savingTheData(filename, tasks) {
+  fs.writeFileSync(filename, JSON.stringify(tasks, null, 2), 'utf-8');
+  console.log(`Data saved to ${filename}`);
+}
 function quit() {
+  savingTheData('database.json', tasks);
   console.log("Quitting now, goodbye!");
   process.exit();
+}
+
+function loadingData(filename) {
+  try {
+    const jsonData = fs.readFileSync(filename, 'utf-8');
+    const data = JSON.parse(jsonData);
+    console.log(`Data loaded from ${filename}`);
+    return data;
+  } catch (error) {
+    console.error(`Error loading data from ${filename}`);
+    return `error`;
+  }
 }
 /**
  * This function will list all the commands that we have in the application till now
