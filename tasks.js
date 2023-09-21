@@ -46,14 +46,20 @@ function onDataReceived(text) {
   else if(text === "list\n"){
     list(tasks)
   }
-  else if(inputArray[0].trim() === "add"){
+  else if(inputArray[0] === "add"){
     inputArray.length > 1 ? add(inputArray.slice(1)) : console.log("Error you can not add empty tesk");
+  }
+  else if(inputArray[0] === "remove"){
+    inputArray.length > 1 ? remove(inputArray[1].trim()) : tasks.pop();
   }else {
     unknownCommand(text);
   }
 }
 
-
+function remove(index){
+   tasks.splice(index,1)
+   return console.log("task is removed")
+}
 function add(task){
   let stringTask = task.join(" ");
   tasks.push(stringTask);
